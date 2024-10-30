@@ -6,9 +6,14 @@ const Home = () => {
   const { user, logout } = useSession();
 
   return (
-    <div>
-      <h2>Bienvenido, {user.username}</h2>
-      <button onClick={logout}>Cerrar Sesión</button>
+    <div className="flex flex-col items-center mt-10">
+      <h2 className="text-3xl font-bold">Bienvenido, {user.username}</h2>
+      <button
+        onClick={logout}
+        className="mt-20 bg-indigo-300 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded"
+      >
+        Cerrar Sesión
+      </button>
     </div>
   );
 };

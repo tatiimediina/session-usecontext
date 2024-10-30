@@ -1,4 +1,3 @@
-// SessionContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const SessionContext = createContext();

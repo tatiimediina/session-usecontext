@@ -18,15 +18,16 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center gap-4 ">
+      <h2 className="text-3xl font-bold">Iniciar Sesión</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
           name="username"
           placeholder="Usuario"
           value={credentials.username}
           onChange={handleChange}
+          className="border border-gray-300 rounded-lg px-3 py-2 focus:border-indigo-400"
         />
         <input
           type="password"
@@ -34,8 +35,13 @@ const Login = () => {
           placeholder="Contraseña"
           value={credentials.password}
           onChange={handleChange}
+          className="border border-gray-300 rounded-lg px-3 py-2 focus:border-indigo-400"
         />
-        <button type="submit" disabled={loading}>
+        <button
+          type="submit"
+          className="bg-indigo-400 rounded-lg px-3 py-2 text-white"
+          disabled={loading}
+        >
           {loading ? "Cargando..." : "Iniciar Sesión"}
         </button>
       </form>
