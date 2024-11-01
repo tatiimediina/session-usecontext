@@ -1,4 +1,9 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import {
+  loginRequest,
+  logoutRequest,
+  checkSessionRequest,
+} from "../api/auth.js";
 
 const SessionContext = createContext();
 
@@ -11,18 +16,7 @@ export const SessionProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("http://localhost:4000/auth/sign-in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-        credentials: "include", // Importante para enviar y recibir cookies
-      });
-
-      if (!response.ok) throw new Error("Credenciales incorrectas");
-
-      const data = await response.json();
+      const data = await loginRequest(credentials);
       await checkSession(); // Verifica y actualiza la sesión después del login
     } catch (err) {
       setError(err.message);
@@ -33,10 +27,7 @@ export const SessionProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch("http://localhost:4000/auth/sign-out", {
-        method: "POST",
-        credentials: "include", // Incluye cookies en la solicitud
-      });
+      await logoutRequest();
       setUser(null); // Limpia el estado del usuario
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
@@ -46,17 +37,8 @@ export const SessionProvider = ({ children }) => {
   const checkSession = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:4000/auth/session", {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user); // Actualiza el usuario en el estado
-      } else {
-        setUser(null);
-      }
+      const data = await checkSessionRequest();
+      setUser(data ? data.user : null); // Actualiza el usuario en el estado
     } catch (error) {
       console.error("Error al verificar sesión:", error);
     } finally {

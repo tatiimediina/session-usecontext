@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSession } from "../context/SessionProvider.jsx";
+import { Button } from "../components/Button.jsx";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -37,13 +38,11 @@ const Login = () => {
           onChange={handleChange}
           className="border border-gray-300 rounded-lg px-3 py-2 focus:border-indigo-400"
         />
-        <button
-          type="submit"
-          className="bg-indigo-400 rounded-lg px-3 py-2 text-white"
+        <Button
+          texto={loading ? "Cargando..." : "Iniciar Sesión"}
+          accion={handleSubmit}
           disabled={loading}
-        >
-          {loading ? "Cargando..." : "Iniciar Sesión"}
-        </button>
+        />
       </form>
       {error && <p>{error}</p>}
     </div>
