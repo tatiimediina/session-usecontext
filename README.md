@@ -41,13 +41,13 @@ El puerto del servidor usado es de "http://localhost:4000/auth/" para cambiarlo 
 `cd backend`
 
 
-Instala las dependencias del cliente:
+Instala las dependencias del servidor:
 
 
 `npm install`
 
 
-Inicia el cliente:
+Inicia el servidor:
 
 
 `npm run dev`
